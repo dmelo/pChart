@@ -5,12 +5,11 @@
     "homepage": "http://www.pchart.net/",
     "autoload": {
         "psr-0": {
-            "": "./library/",
+            "": "./library/"
         }
     },
     "include-path": [
         "library/"
     ]
-
 }
 

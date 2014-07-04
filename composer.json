@@ -2,6 +2,15 @@
     "name": "dmelo/pchart",
     "description": "pChart is a PHP library that will help you to create anti-aliased charts or pictures directly from your web server. You can then display the result in the client browser, sent it by mail or insert it into PDFs. pChart provide object oriented coding syntax and is fully in line with the new web standards allowing you to enhance your web2.0 applications.",
     "type": "library",
-    "homepage": "http://www.pchart.net/"
+    "homepage": "http://www.pchart.net/",
+    "autoload": {
+        "psr-0": {
+            "": "./library/",
+        }
+    },
+    "include-path": [
+        "library/"
+    ]
+
 }
 

@@ -885,9 +885,9 @@
    /* Draw a ring chart */
    function draw2DRing($X,$Y,$Format="")
     {
-     $OuterRadius	= isset($Format["Radius"]) ? $Format["Radius"] : 60;
+     $OuterRadius	= isset($Format["ORadius"]) ? $Format["ORadius"] : 60;
      $Precision		= isset($Format["Precision"]) ? $Format["Precision"] : 0;
-     $InnerRadius	= isset($Format["Radius"]) ? $Format["Radius"] : 30;
+     $InnerRadius	= isset($Format["IRadius"]) ? $Format["IRadius"] : 30;
      $Border		= isset($Format["Border"]) ? $Format["Border"] : FALSE;
      $BorderR		= isset($Format["BorderR"]) ? $Format["BorderR"] : 255;
      $BorderG		= isset($Format["BorderG"]) ? $Format["BorderG"] : 255;

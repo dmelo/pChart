@@ -23,10 +23,10 @@
    var $CRC;
 
    /* Class creator */
-   function pBarcode128($BasePath="")
+   function __construct($BasePath="")
     {
-     $this->Codes   = "";
-     $this->Reverse = "";
+     $this->Codes   = array();
+     $this->Reverse = array();
 
      $FileHandle = @fopen($BasePath."data/128B.db", "r");
 

@@ -43,11 +43,11 @@
    var $Labels;
 
    /* Class creator */
-   function pSpring()
+   function __construct()
     {
      /* Initialise data arrays */
-     $this->Data = "";
-     $this->Links = "";
+     $this->Data = array();
+     $this->Links = array();
 
      /* Set nodes defaults */
      $this->Default["R"]		= 255;
@@ -281,7 +281,7 @@
     {
      if ( !isset($this->Data[$Key]["Connections"]) ) { return(""); }
 
-     $MaxWeight = 0; $Result = "";
+     $MaxWeight = 0; $Result = array();
      foreach($this->Data[$Key]["Connections"] as $Key => $PeerID)
       {
        if ( $this->Data[$PeerID]["Weight"] > $MaxWeight )
@@ -541,7 +541,7 @@
       }
 
      /* Dump all links */
-     $Links = "";
+     $Links = array();
      foreach($this->Data as $Key => $Settings)
       {
        $X1 = $Settings["X"];
@@ -680,7 +680,7 @@
      if ( $CenterGraph ) { $this->center(); }
 
      /* Draw the connections */
-     $Drawn = "";
+     $Drawn = array();
      foreach($this->Data as $Key => $Settings)
       {
        $X	= $Settings["X"];
@@ -690,14 +690,14 @@
         {
          foreach ($Settings["Connections"] as $ID => $NodeID)
           {
-           if ( !isset($Drawn[$Key]) )    { $Drawn[$Key] = ""; }
-           if ( !isset($Drawn[$NodeID]) ) { $Drawn[$NodeID] = ""; }
+           if ( !isset($Drawn[$Key]) )    { $Drawn[$Key] = array(); }
+           if ( !isset($Drawn[$NodeID]) ) { $Drawn[$NodeID] = array(); }
 
            if ( isset($this->Data[$NodeID]) && !isset($Drawn[$Key][$NodeID]) && !isset($Drawn[$NodeID][$Key]) )
             {
              $Color = array("R"=>$this->Default["LinkR"],"G"=>$this->Default["LinkG"],"B"=>$this->Default["LinkB"],"Alpha"=>$this->Default["Alpha"]);
 
-             if ( $this->Links != "" )
+             if ( !empty($this->Links) )
               {
                if ( isset($this->Links[$Key][$NodeID]["R"]) )
                 { $Color = array("R"=>$this->Links[$Key][$NodeID]["R"],"G"=>$this->Links[$Key][$NodeID]["G"],"B"=>$this->Links[$Key][$NodeID]["B"],"Alpha"=>$this->Links[$Key][$NodeID]["Alpha"]); }
@@ -711,7 +711,7 @@
              $this->pChartObject->drawLine($X,$Y,$X2,$Y2,$Color);
              $Drawn[$Key][$NodeID] = TRUE;
 
-             if ( isset($this->Links) && $this->Links != "" )
+             if ( isset($this->Links) && !empty($this->Links) )
               {
                if ( isset($this->Links[$Key][$NodeID]["Name"]) || isset($this->Links[$NodeID][$Key]["Name"]) )
                 {
@@ -767,7 +767,7 @@
         }
        elseif ( $Shape == NODE_SHAPE_TRIANGLE )
         {
-         $Points = "";
+         $Points = array();
          $Points[] = cos(deg2rad(270)) * $Size + $X; $Points[] = sin(deg2rad(270)) * $Size + $Y;
          $Points[] = cos(deg2rad(45)) * $Size + $X;  $Points[] = sin(deg2rad(45)) * $Size + $Y;
          $Points[] = cos(deg2rad(135)) * $Size + $X; $Points[] = sin(deg2rad(135)) * $Size + $Y;

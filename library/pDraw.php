@@ -573,7 +573,7 @@
     }
 
    /* Drawn a spline based on the bezier function */
-   function drawSpline($Coordinates,$Format="")
+   function drawSpline($Coordinates,$Format=array())
     {
      $R		= isset($Format["R"]) ? $Format["R"] : 0;
      $G		= isset($Format["G"]) ? $Format["G"] : 0;
@@ -586,7 +586,7 @@
      $PathOnly	= isset($Format["PathOnly"]) ? $Format["PathOnly"] : FALSE;
      $Weight	= isset($Format["Weight"]) ? $Format["Weight"] : NULL;
 
-     $Cpt = NULL; $Mode = NULL; $Result = "";
+     $Cpt = NULL; $Mode = NULL; $Result = array();
      for($i=1;$i<=count($Coordinates)-1;$i++)
       {
        $X1 = $Coordinates[$i-1][0]; $Y1 = $Coordinates[$i-1][1];
@@ -632,7 +632,7 @@
     }
 
    /* Draw a bezier curve with two controls points */
-   function drawBezier($X1,$Y1,$X2,$Y2,$Xv1,$Yv1,$Xv2,$Yv2,$Format="")
+   function drawBezier($X1,$Y1,$X2,$Y2,$Xv1,$Yv1,$Xv2,$Yv2,$Format=array())
     {
      $R		= isset($Format["R"]) ? $Format["R"] : 0;
      $G		= isset($Format["G"]) ? $Format["G"] : 0;
@@ -663,12 +663,12 @@
      $P[3]["X"] = $X2;  $P[3]["Y"] = $Y2;
 
      /* Compute the bezier points */
-     $Q = ""; $ID = 0; $Path = "";
+     $Q = array(); $ID = 0; $Path = "";
      for($i=0;$i<=$Precision;$i=$i+1)
       {
        $u = $i / $Precision;
 
-       $C    = "";
+       $C    = array();
        $C[0] = (1 - $u) * (1 - $u) * (1 - $u);
        $C[1] = ($u * 3) * (1 - $u) * (1 - $u);
        $C[2] = 3 * $u * $u * (1 - $u);
@@ -676,7 +676,7 @@
 
        for($j=0;$j<=3;$j++)
         {
-         if ( !isset($Q[$ID]) ) { $Q[$ID] = ""; }
+         if ( !isset($Q[$ID]) ) { $Q[$ID] = array(); }
          if ( !isset($Q[$ID]["X"]) ) { $Q[$ID]["X"] = 0; }
          if ( !isset($Q[$ID]["Y"]) ) { $Q[$ID]["Y"] = 0; }
 
@@ -921,7 +921,7 @@
        $this->drawFilledCircle($X+$this->ShadowX,$Y+$this->ShadowY,$Radius,array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa,"Ticks"=>$Ticks));
       }
 
-     $this->Mask  = "";
+     $this->Mask  = array();
      $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
      for ($i=0; $i<=$Radius*2; $i++)
       {
@@ -937,7 +937,7 @@
      if ( $this->Antialias )
       $this->drawCircle($X,$Y,$Radius,$Radius,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
 
-     $this->Mask = "";
+     $this->Mask = array();
 
      if ( $BorderR != -1 )
       $this->drawCircle($X,$Y,$Radius,$Radius,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha,"Ticks"=>$Ticks));
@@ -2498,12 +2498,12 @@
    function computeScale($XMin,$XMax,$MaxDivs,$Factors,$AxisID=0)
     {
      /* Compute each factors */
-     $Results = "";
+     $Results = array();
      foreach ($Factors as $Key => $Factor)
       $Results[$Factor] = $this->processScale($XMin,$XMax,$MaxDivs,array($Factor),$AxisID);
 
      /* Remove scales that are creating to much decimals */
-     $GoodScaleFactors = "";
+     $GoodScaleFactors = array();
      foreach ($Results as $Key => $Result)
       {
        $Decimals = preg_split("/\./",$Result["RowHeight"]);
@@ -2511,7 +2511,7 @@
       }
 
      /* Found no correct scale, shame,... returns the 1st one as default */
-     if ( $GoodScaleFactors == "" ) { return($Results[$Factors[0]]); }
+     if ( count($GoodScaleFactors) === 0 ) { return($Results[$Factors[0]]); }
 
      /* Find the factor that cause the maximum number of Rows */
      $MaxRows = 0; $BestFactor = 0;
@@ -2537,7 +2537,7 @@
      else
       $Mode = AXIS_FORMAT_DEFAULT;
 
-     $Scale = "";
+     $Scale = array();
      if ( $XMin != $XMax )
       {
        $Found = FALSE; $Rescaled = FALSE; $Scaled10Factor = .0001; $Result = 0;
@@ -3093,9 +3093,9 @@
      if ( !isset($Data["Axis"][$AxisID]) ) { return(-1); }
 
      if ( $SerieName != NULL ) { $AxisID = $Data["Series"][$SerieName]["Axis"]; }
-     if ( !is_array($Values) ) { $tmp = $Values; $Values = ""; $Values[0] = $tmp; }
+     if ( !is_array($Values) ) { $tmp = $Values; $Values = array(); $Values[0] = $tmp; }
 
-     $Result = "";
+     $Result = array();
      if ( $Data["Orientation"] == SCALE_POS_LEFTRIGHT )
       {
        $Height      = ($this->GraphAreaY2 - $this->GraphAreaY1) - $Data["Axis"][$AxisID]["Margin"]*2;
@@ -3479,7 +3479,7 @@
          if ( $Data["Orientation"] == SCALE_POS_LEFTRIGHT )
           {
            if ( $XDivs == 0 ) { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1)/4; } else { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1-$XMargin*2)/$XDivs; }
-           $X     = $this->GraphAreaX1 + $XMargin; $WayPoints = "";
+           $X     = $this->GraphAreaX1 + $XMargin; $WayPoints = array();
            $Force = $XStep / 5;
 
            if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
@@ -3492,7 +3492,7 @@
              if ( $RecordImageMap && $Y != VOID ) { $this->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".$ImageMapPlotSize,$this->toHTMLColor($R,$G,$B),$SerieDescription,$this->scaleFormat($Serie["Data"][$Key],$Mode,$Format,$Unit)); }
 
              if ( $Y == VOID && $LastY != NULL )
-              { $this->drawSpline($WayPoints,array("Force"=>$Force,"R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks,"Weight"=>$Weight)); $WayPoints = ""; }
+              { $this->drawSpline($WayPoints,array("Force"=>$Force,"R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks,"Weight"=>$Weight)); $WayPoints = array(); }
 
              if ( $Y != VOID && $LastY == NULL && $LastGoodY != NULL && !$BreakVoid )
               { $this->drawLine($LastGoodX,$LastGoodY,$X,$Y,$BreakSettings); }
@@ -3511,7 +3511,7 @@
          else
           {
            if ( $XDivs == 0 ) { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1)/4; } else { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1-$XMargin*2)/$XDivs; }
-           $Y     = $this->GraphAreaY1 + $XMargin; $WayPoints = "";
+           $Y     = $this->GraphAreaY1 + $XMargin; $WayPoints = array();
            $Force = $YStep / 5;
 
            if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
@@ -3524,7 +3524,7 @@
              if ( $RecordImageMap && $X != VOID ) { $this->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".$ImageMapPlotSize,$this->toHTMLColor($R,$G,$B),$SerieDescription,$this->scaleFormat($Serie["Data"][$Key],$Mode,$Format,$Unit)); }
 
              if ( $X == VOID && $LastX != NULL )
-              { $this->drawSpline($WayPoints,array("Force"=>$Force,"R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks,"Weight"=>$Weight)); $WayPoints = ""; }
+              { $this->drawSpline($WayPoints,array("Force"=>$Force,"R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks,"Weight"=>$Weight)); $WayPoints = array(); }
 
              if ( $X != VOID && $LastX == NULL && $LastGoodX != NULL && !$BreakVoid )
               { $this->drawLine($LastGoodX,$LastGoodY,$X,$Y,$BreakSettings); }
@@ -3589,7 +3589,7 @@
          if ( $Data["Orientation"] == SCALE_POS_LEFTRIGHT )
           {
            if ( $XDivs == 0 ) { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1)/4; } else { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1-$XMargin*2)/$XDivs; }
-           $X     = $this->GraphAreaX1 + $XMargin; $WayPoints = "";
+           $X     = $this->GraphAreaX1 + $XMargin; $WayPoints = array();
            $Force = $XStep / 5;
 
            if ( !$AroundZero ) { $YZero = $this->GraphAreaY2-1; }
@@ -3624,7 +3624,7 @@
                  $this->drawSpline($WayPoints,array("Force"=>$Force,"R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
                 }
 
-               $WayPoints = "";
+               $WayPoints = array();
               }
              else
               $WayPoints[] = array($X,$Y-.5); /* -.5 for AA visual fix */
@@ -3653,7 +3653,7 @@
          else
           {
            if ( $XDivs == 0 ) { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1)/4; } else { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1-$XMargin*2)/$XDivs; }
-           $Y     = $this->GraphAreaY1 + $XMargin; $WayPoints = "";
+           $Y     = $this->GraphAreaY1 + $XMargin; $WayPoints = array();
            $Force = $YStep / 5;
 
            if ( !$AroundZero ) { $YZero = $this->GraphAreaX1+1; }
@@ -3687,7 +3687,7 @@
                  $this->drawSpline($WayPoints,array("Force"=>$Force,"R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
                 }
 
-               $WayPoints = "";
+               $WayPoints = array();
               }
              else
               $WayPoints[] = array($X,$Y);

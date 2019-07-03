@@ -2,9 +2,9 @@
  /* CAT:Misc */
 
  /* Include all the classes */ 
- include("../class/pDraw.class.php"); 
- include("../class/pImage.class.php"); 
- include("../class/pData.class.php");
+ include(__DIR__ . "/../library/pDraw.php"); 
+ include(__DIR__ . "/../library/pImage.php"); 
+ include(__DIR__ . "/../library/pData.php");
 
  /* Create your dataset object */ 
  $myData = new pData(); 

@@ -2,9 +2,9 @@
  /* CAT:Barcode */
 
  /* pChart library inclusions */
- include("../class/pDraw.class.php");
- include("../class/pBarcode39.class.php");
- include("../class/pImage.class.php");
+ include(__DIR__ . "/../library/pDraw.php");
+ include(__DIR__ . "/../library/pBarcode39.php");
+ include(__DIR__ . "/../library/pImage.php");
 
  /* Create the pChart object */
  $myPicture = new pImage(700,230);

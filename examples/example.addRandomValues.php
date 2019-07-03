@@ -2,9 +2,9 @@
  /* CAT:Misc */
 
  /* pChart library inclusions */
- include("../class/pData.class.php");
- include("../class/pDraw.class.php");
- include("../class/pImage.class.php");
+ include(__DIR__ . "/../library/pData.php");
+ include(__DIR__ . "/../library/pDraw.php");
+ include(__DIR__ . "/../library/pImage.php");
 
  /* Create the pData object with some random values*/
  $MyData = new pData();  

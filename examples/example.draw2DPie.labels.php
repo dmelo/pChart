@@ -2,10 +2,10 @@
  /* CAT:Pie charts */
 
  /* pChart library inclusions */
- include("../class/pData.class.php");
- include("../class/pDraw.class.php");
- include("../class/pPie.class.php");
- include("../class/pImage.class.php");
+ include(__DIR__ . "/../library/pData.php");
+ include(__DIR__ . "/../library/pDraw.php");
+ include(__DIR__ . "/../library/pPie.php");
+ include(__DIR__ . "/../library/pImage.php");
 
  /* Create and populate the pData object */
  $MyData = new pData();   

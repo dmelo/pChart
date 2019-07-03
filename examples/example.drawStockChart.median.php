@@ -2,10 +2,10 @@
  /* CAT:Stock chart */
 
  /* pChart library inclusions */
- include("../class/pData.class.php");
- include("../class/pDraw.class.php");
- include("../class/pImage.class.php");
- include("../class/pStock.class.php");
+ include(__DIR__ . "/../library/pData.php");
+ include(__DIR__ . "/../library/pDraw.php");
+ include(__DIR__ . "/../library/pImage.php");
+ include(__DIR__ . "/../library/pStock.php");
 
  /* Create and populate the pData object */
  $MyData = new pData();  

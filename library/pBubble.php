@@ -23,7 +23,7 @@
    var $pDataObject;
 
    /* Class creator */
-   function pBubble($pChartObject,$pDataObject)
+   function __construct($pChartObject,$pDataObject)
     {
      $this->pChartObject = $pChartObject;
      $this->pDataObject  = $pDataObject;
@@ -36,7 +36,7 @@
      if ( !is_array($WeightSeries) )	{ $WeightSeries = array($WeightSeries); }
 
      /* Parse each data series to find the new min & max boundaries to scale */
-     $NewPositiveSerie = ""; $NewNegativeSerie = ""; $MaxValues = 0; $LastPositive = 0; $LastNegative = 0;
+     $NewPositiveSerie = array(); $NewNegativeSerie = array(); $MaxValues = 0; $LastPositive = 0; $LastNegative = 0;
      foreach($DataSeries as $Key => $SerieName)
       {
        $SerieWeightName = $WeightSeries[$Key];
@@ -73,7 +73,7 @@
       }
 
      /* Check for missing values and all the fake positive serie */
-     if ( $NewPositiveSerie != "" )
+     if ( !empty($NewPositiveSerie) )
       {
        for ($i=0; $i<$MaxValues; $i++) { if (!isset($NewPositiveSerie[$i])) { $NewPositiveSerie[$i] = $LastPositive; } }
 
@@ -81,7 +81,7 @@
       }
 
      /* Check for missing values and all the fake negative serie */
-     if ( $NewNegativeSerie != "" )
+     if ( !empty($NewNegativeSerie) )
       {
        for ($i=0; $i<$MaxValues; $i++) { if (!isset($NewNegativeSerie[$i])) { $NewNegativeSerie[$i] = $LastNegative; } }
 
@@ -256,7 +256,7 @@
      $OverrideTitle	= isset($Format["OverrideTitle"]) ? $Format["OverrideTitle"] : NULL;
      $DrawPoint		= isset($Format["DrawPoint"]) ? $Format["DrawPoint"] : LABEL_POINT_BOX;
 
-     if ( !is_array($Points) ) { $Point = $Points; $Points = ""; $Points[] = $Point; }
+     if ( !is_array($Points) ) { $Point = $Points; $Points = array(); $Points[] = $Point; }
 
      $Data    = $this->pDataObject->getData();
      $Palette = $this->pDataObject->getPalette();
@@ -296,7 +296,7 @@
        else
         $Description = "No description";
 
-       $Series = "";
+       $Series = array();
        $Series[] = array("Format"=>$Color,"Caption"=>$Caption);
 
        if ( $Data["Orientation"] == SCALE_POS_LEFTRIGHT )

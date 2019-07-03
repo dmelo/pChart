@@ -24,11 +24,11 @@
    var $MOD43;
 
    /* Class creator */
-   function pBarcode39($BasePath="",$EnableMOD43=FALSE)
+   function __cosntruct($BasePath="",$EnableMOD43=FALSE)
     {
      $this->MOD43  = $EnableMOD43;
-     $this->Codes   = "";
-     $this->Reverse = "";
+     $this->Codes   = array();
+     $this->Reverse = array();
 
      $FileHandle = @fopen($BasePath."data/39.db", "r");
 

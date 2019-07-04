@@ -2,8 +2,8 @@
  /* CAT:Misc */
 
  /* pChart library inclusions */
- include("../class/pDraw.class.php");
- include("../class/pImage.class.php");
+ include(__DIR__ . "/../library/pDraw.php");
+ include(__DIR__ . "/../library/pImage.php");
 
  /* Create the pChart object */
  $myPicture = new pImage(550,175);

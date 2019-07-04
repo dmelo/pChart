@@ -27,7 +27,7 @@
    var $pChartObject;
 
    /* Class creator */
-   function pRadar()
+   function __construct()
     { }
 
    /* Draw a radar chart */
@@ -161,7 +161,7 @@
          if ( $Layout == RADAR_LAYOUT_STAR )
           {
            $Color      = array("R"=>$BackgroundR,"G"=>$BackgroundG,"B"=>$BackgroundB,"Alpha"=>$BackgroundAlpha);
-           $PointArray = "";
+           $PointArray = array();
            for($i=0;$i<=360;$i=$i+(360/$Points))
             {
              $PointArray[] = cos(deg2rad($i+$AxisRotation)) * $EdgeHeight + $CenterX;
@@ -187,7 +187,7 @@
            for($j=$Segments;$j>=1;$j--)
             {
              $Color      = array("R"=>$BackgroundGradient["StartR"]+$GradientROffset*$j,"G"=>$BackgroundGradient["StartG"]+$GradientGOffset*$j,"B"=>$BackgroundGradient["StartB"]+$GradientBOffset*$j,"Alpha"=>$BackgroundGradient["StartAlpha"]+$GradientAlphaOffset*$j);
-             $PointArray = "";
+             $PointArray = array();
 
              for($i=0;$i<=360;$i=$i+(360/$Points))
               {
@@ -316,7 +316,7 @@
       }
 
      /* Compute the plots position */
-     $ID = 0; $Plot = "";
+     $ID = 0; $Plot = array();
      foreach($Data["Series"] as $SerieName => $DataS)
       {
        if ( $SerieName != $LabelSerie )
@@ -349,7 +349,7 @@
          if ($PolyAlpha != NULL)
           $Color = array("R"=>$Palette[$ID]["R"],"G"=>$Palette[$ID]["G"],"B"=>$Palette[$ID]["B"],"Alpha"=>$PolyAlpha,"Surrounding"=>$PointSurrounding);
 
-         $PointsArray = "";
+         $PointsArray = array();
          for($i=0; $i<count($Points);$i++) 
           { $PointsArray[] = $Points[$i][0]; $PointsArray[] = $Points[$i][1]; }
          $Object->drawPolygon($PointsArray,$Color);
@@ -600,7 +600,7 @@
       }
 
      /* Compute the plots position */
-     $ID = 0; $Plot = "";
+     $ID = 0; $Plot = array();
      foreach($Data["Series"] as $SerieName => $DataSet)
       {
        if ( $SerieName != $LabelSerie )
@@ -633,7 +633,7 @@
          if ($PolyAlpha != NULL)
           $Color = array("R"=>$Palette[$ID]["R"],"G"=>$Palette[$ID]["G"],"B"=>$Palette[$ID]["B"],"Alpha"=>$PolyAlpha,"Surrounding"=>$PointSurrounding);
 
-         $PointsArray = "";
+         $PointsArray = array();
          for($i=0; $i<count($Points);$i++) 
           { $PointsArray[] = $Points[$i][0]; $PointsArray[] = $Points[$i][1]; }
 

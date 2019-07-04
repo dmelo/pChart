@@ -10,6 +10,9 @@
     },
     "include-path": [
         "library/"
-    ]
+    ],
+    "require": {
+        "ext-gd": "*"
+    }
 }
 

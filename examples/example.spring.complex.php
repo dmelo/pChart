@@ -2,10 +2,10 @@
  /* CAT:Spring chart */
 
  /* pChart library inclusions */
- include("../class/pData.class.php");
- include("../class/pDraw.class.php");
- include("../class/pSpring.class.php");
- include("../class/pImage.class.php");
+ include(__DIR__ . "/../library/pData.php");
+ include(__DIR__ . "/../library/pDraw.php");
+ include(__DIR__ . "/../library/pSpring.php");
+ include(__DIR__ . "/../library/pImage.php");
 
  /* Create the pChart object */
  $myPicture = new pImage(600,600);

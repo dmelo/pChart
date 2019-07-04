@@ -2,9 +2,9 @@
  /* CAT:Barcode */
 
  /* pChart library inclusions */
- include("../class/pDraw.class.php");
- include("../class/pBarcode128.class.php");
- include("../class/pImage.class.php");
+ include(__DIR__ . "/../library/pDraw.php");
+ include(__DIR__ . "/../library/pBarcode128.php");
+ include(__DIR__ . "/../library/pImage.php");
 
  /* Create the barcode 128 object */
  $Barcode = new pBarcode128("../");

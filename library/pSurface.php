@@ -30,11 +30,11 @@
    var $Points;
 
    /* Class creator */
-   function pSurface($pChartObject)
+   function __construct($pChartObject)
     {
      $this->pChartObject = $pChartObject;
      $this->GridSize     = 10;
-     $this->Points       = "";
+     $this->Points       = array();
     }
 
    /* Define the grid size and initialise the 2D matrix */
@@ -73,7 +73,7 @@
      $Labels		= isset($Format["Labels"]) ? $Format["Labels"] : NULL;
      $CountOffset	= isset($Format["CountOffset"]) ? $Format["CountOffset"] : 0;
 
-     if ( $Labels != NULL && !is_array($Labels) ) { $Label = $Labels; $Labels = ""; $Labels[] = $Label; }
+     if ( $Labels != NULL && !is_array($Labels) ) { $Label = $Labels; $Labels = array(); $Labels[] = $Label; }
 
      $X0    = $this->pChartObject->GraphAreaX1;
      $XSize = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1) / ($this->GridSizeX+1);
@@ -120,7 +120,7 @@
      $Labels		= isset($Format["Labels"]) ? $Format["Labels"] : NULL;
      $CountOffset	= isset($Format["CountOffset"]) ? $Format["CountOffset"] : 0;
 
-     if ( $Labels != NULL && !is_array($Labels) ) { $Label = $Labels; $Labels = ""; $Labels[] = $Label; }
+     if ( $Labels != NULL && !is_array($Labels) ) { $Label = $Labels; $Labels = array(); $Labels[] = $Label; }
 
      $Y0    = $this->pChartObject->GraphAreaY1;
      $YSize = ($this->pChartObject->GraphAreaY2 - $this->pChartObject->GraphAreaY1) / ($this->GridSizeY+1);
@@ -254,7 +254,7 @@
    /* Compute the missing points */
    function computeMissing()
     {
-     $Missing = "";
+     $Missing = array();
      for($X=0;$X<=$this->GridSizeX;$X++)
       {
        for($Y=0;$Y<=$this->GridSizeY;$Y++)

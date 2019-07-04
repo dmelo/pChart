@@ -573,7 +573,7 @@
     }
 
    /* Drawn a spline based on the bezier function */
-   function drawSpline($Coordinates,$Format="")
+   function drawSpline($Coordinates,$Format=array())
     {
      $R		= isset($Format["R"]) ? $Format["R"] : 0;
      $G		= isset($Format["G"]) ? $Format["G"] : 0;
@@ -632,7 +632,7 @@
     }
 
    /* Draw a bezier curve with two controls points */
-   function drawBezier($X1,$Y1,$X2,$Y2,$Xv1,$Yv1,$Xv2,$Yv2,$Format="")
+   function drawBezier($X1,$Y1,$X2,$Y2,$Xv1,$Yv1,$Xv2,$Yv2,$Format=array())
     {
      $R		= isset($Format["R"]) ? $Format["R"] : 0;
      $G		= isset($Format["G"]) ? $Format["G"] : 0;
